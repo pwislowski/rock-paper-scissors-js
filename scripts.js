@@ -1,6 +1,8 @@
+// @ts-check
+
 function getComputerChoice() {
-    options = ["Rock", "Paper", "Scissors"];
-    rand = Math.floor(Math.random() * 3);
+    let options = ["Rock", "Paper", "Scissors"];
+    let rand = Math.floor(Math.random() * 3);
 
     return options[rand].toLowerCase();
 }
