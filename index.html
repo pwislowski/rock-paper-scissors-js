@@ -4,9 +4,31 @@
         <title>Rock Paper Scissors</title>
         <meta charset="utf-8">
         <link rel="stylesheet" href="styles.css">
+        <script src="scripts.js" defer></script>
     </head>
     <body>
-        <h1>Rock Paper Scissors</h1>
-        <script src="scripts.js"></script>
+        <div class="content">
+            <h1>Rock Paper Scissors</h1>
+            <h4>best out of three!</h4>
+            <div class="buttons">
+                <div id="rock">
+                    <button>Rock</button>
+                </div>
+                <div id="paper">
+                    <button>Paper</button>
+                </div>
+                <div id="scissors">
+                    <button>Scissors</button>
+                </div>
+            </div>
+            <div class="score">
+                <div class="human-score">
+                    <p>your score: <span id="human-score">0</span></p>
+                </div>
+                <div class="cpu-score">
+                    <p>cpu score: <span id="cpu-score">0</span></p>
+                </div>
+            </div>
+        </div>
     </body>
 </html>
