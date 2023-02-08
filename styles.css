@@ -10,6 +10,7 @@ body {
 
 .content {
     flex: 0 0 1;
+    padding: 5%;
 }
 
 h1, h4 {
@@ -46,8 +47,28 @@ button:hover {
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
+.selection {
+    display: flex;
+    padding: 5%;
+    justify-content: space-around;
+    width: 100%;
+    gap: 10%;
+}
+
+.selection > div {
+    font-family: monospace;
+    font-weight: bolder;
+}
+
+#human-choice, #cpu-choice {
+    flex: 1;
+    font-style: normal;
+    text-align: center;
+}
+
 .score {
     display: flex;
+    padding: 5%;
     justify-content: space-evenly;
 }
 
