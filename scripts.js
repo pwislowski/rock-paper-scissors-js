@@ -7,51 +7,30 @@ function getComputerChoice() {
     return options[rand].toLowerCase();
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(playerSelection) {
+    // returns int
+    // `1` human wins
+    // `-1` cpu wins
+    // `0` draw
+
+    let cpuSelection = getComputerChoice();
+
     updateSelection(
         playerSelection,
-        computerSelection
+        cpuSelection
       );
 
-    if (playerSelection == "rock" && computerSelection == "scissors") {
-        return true;
-    } else if (playerSelection == "paper" && computerSelection == "rock") {
-        return true;
-    } else if (playerSelection == "scissors" && computerSelection == "paper") {
-        return true;
-    } else if (playerSelection == computerSelection) {
-        playRound(playerSelection, getComputerChoice());
+    if (playerSelection == "rock" && cpuSelection == "scissors") {
+        return 1;
+    } else if (playerSelection == "paper" && cpuSelection == "rock") {
+        return 1;
+    } else if (playerSelection == "scissors" && cpuSelection == "paper") {
+        return 1;
+    } else if (playerSelection == cpuSelection) {
+        return 0;
     } else {
-        return false;
+        return -1;
     }
-}
-
-function game(rounds = 3) {
-    let player = 0;
-    let cpu = 0;
-
-    console.log(getPlayerSelection());
-
-    for (let i = 0; i < rounds; i++) {
-
-        if (playRound(
-            getPlayerSelection(),
-            getComputerChoice()
-        )) {
-            player += 1;
-            updateScores('human-score');
-        } else {
-            cpu += 1;
-            updateScores('cpu-score');
-        }
-    }
-
-    if (player > cpu) {
-        announceWinner('human');
-    } else {
-        announceWinner('');
-    }
-
 }
 
 function updateScores(id) {
@@ -59,12 +38,6 @@ function updateScores(id) {
     let currentScore = parseInt(score?.textContent);
     score.textContent = currentScore + 1;
 
-}
-
-function currentScores(id) {
-    let score = document.querySelector('#' + id);
-
-    return parseInt(score?.textContent);
 }
 
 function announceWinner(winner) {
@@ -91,21 +64,6 @@ function announceWinner(winner) {
     );
 }
 
-function getPlayerSelection() {
-    // originally prompt
-    buttons = document.querySelectorAll("button");
-    buttons.forEach((element) => {
-        element.addEventListener(
-            'click',
-            (e) => {
-                let selection = e.target.textContent.toLowerCase();
-
-                return selection
-            }
-        )
-    });
-}
-
 function updateSelection(human_param, cpu_param) {
     let spanH = document.querySelector('#human-choice');
     let spanC = document.querySelector('#cpu-choice');
@@ -128,19 +86,21 @@ function main() {
     button.forEach(
         (b) => {
             b.addEventListener("click", function(e) {
-                round ++;
-                if (round < 4) {
+                if (round <= 3) {
 
                   let playerSelection = e.target.textContent.toLowerCase();
-                  let cpuSelection = getComputerChoice();
-                  let r = playRound(playerSelection, cpuSelection);
+                  let outcome = playRound(playerSelection);
 
-                  if (r) { // human wins
+                  if (outcome == 1) { // human wins
                     human += 1;
                     updateScores('human-score');
-                  } else {
+                    round += 1;
+                  } else if (outcome == -1) {
                     cpu += 1;
                     updateScores('cpu-score');
+                    round += 1;
+                  } else {
+                    null
                   }
                 }
 
@@ -154,7 +114,6 @@ function main() {
               });          
         }
     )
-
 }
 
 main();
